@@ -15,7 +15,7 @@ trait BladeCompiler
      *
      * @return string
      */
-    protected function createAttributes(array $attributes)
+    protected function createAttributes(array $attributes): string
     {
         return (new ComponentAttributeBag($attributes))->toHtml();
     }
@@ -28,11 +28,11 @@ trait BladeCompiler
      *
      * @return string
      */
-    protected function createViewFromString(Factory $factory, string $contents)
+    protected function createViewFromString(Factory $factory, string $contents): string
     {
         $factory->addNamespace(
             '__components',
-            $directory = Container::getInstance()['config']->get('view.compiled')
+            $directory = Container::getInstance()->make('config')->get('view.compiled')
         );
 
         if (! file_exists($viewFile = $directory.'/'.sha1($contents).'.php')) {

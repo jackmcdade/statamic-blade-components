@@ -3,6 +3,7 @@
 namespace Octoper\BladeComponents\Tags;
 
 use Illuminate\Container\Container;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Octoper\BladeComponents\BladeCompiler;
@@ -35,7 +36,7 @@ class BladeComponent extends Tags
 			EOT
         );
 
-        $factory = Container::getInstance()->make('view');
+        $factory = Container::getInstance()->make(Factory::class);
 
         return View::make($this->createViewFromString($factory, $compiledBladeView))->render();
     }
